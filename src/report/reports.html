@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/libs/bootstrap/icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="/libs/bootstrap-table/css/bootstrap-table.min.css" />
+  <link rel="stylesheet" href="reports.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="container-fluid py-5 report-detail">
+      <header class="d-flex  flex-column justify-content-center align-items-center py-3 mb-1">
+        <a href="http://OmniOptimizer.com/" target="_blank"
+          class="d-flex align-items-center mb-3 mb-md-0 text-dark text-decoration-none">
+          <img id="reportImg" src="/images/icons/OmniOptimizerLogoDark.png" alt="OmniOprimizer logo">
+        </a>
+      </header>
+
+      <div id="toolbar">
+        <button type="button" class="btn btn-dark btn float-end" id="download-report"><i
+            class="bi bi-cloud-download"></i>
+          Download
+          Report</button>
+        <a href="https://nhwt.tech/chart" target="_blank" class="btn btn-dark btn float-end mx-2">
+            <i class="bi bi-bar-chart-line"></i>
+            Tradingview Analysis Tool 
+        </a>
+      </div>
+
+      
+
+      <table id="table" data-toggle="table" data-sort-class="table-active"  data-sortable="true" data-toolbar="#toolbar"  
+        data-toolbar-align="right" data-custom-sort="customSort" data-pagination="true" data-page-list="[10, 20, 50, 100, 10000]" data-search="true"
+        data-show-columns="true" data-search-align="left" data-buttons-align="left" style="font-size: 16px;">
+        <thead>
+          <tr>
+            <th data-field="parameters" data-sortable="true">Parameters</th>
+            <th data-field="netProfitAmount" data-sortable="true">Net Profit Amount</th>
+            <th data-field="netProfitPercent" data-sortable="true">Net Profit Percent</th>
+            <th data-field="closedTrades" data-sortable="true">Closed Trades</th>
+            <th data-field="percentProfitable" data-sortable="true">Percent Profitable</th>
+            <th data-field="profitFactor" data-sortable="true">Profit Factor</th>
+            <th data-field="maxDrawdownAmount" data-sortable="true">Max Drawdown Amount</th>
+            <th data-field="maxDrawdownPercent" data-sortable="true">Max Drawdown Percent</th>
+            <th data-field="averageTradeAmount" data-sortable="true">Average Trade Amount</th>
+            <th data-field="averageTradePercent" data-sortable="true">Average Trade Percent</th>
+            <th data-field="avgerageBarsInTrades" data-sortable="true">Average Bars In Trades</th>
+          </tr>
+        </thead>
+      </table>
+
+    </div>
+
+    <div class="container-fluid">
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 mb-2 mt-4 border-top">
+        <div class="col-md-6 d-flex align-items-center">
+          <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+          </a>
+          <span  class="mb-md-0 text-muted">&copy;  2025 OmniOptimizer - All Rights Reserved.
+          </span>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+  <script src="/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/libs/bootstrap-table/js/bootstrap-table.min.js"></script>
+  <script src="reports.js"></script>
+</body>
+</html>

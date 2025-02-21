@@ -1,0 +1,48 @@
+{
+   "manifest_version": 3,
+   "name": "OmniOptimizer",
+   "description": "OmniOptimizer leverages algorithmic optimization to dynamically refine trading strategies and perfect performance.",
+   "default_locale": "en",
+   "permissions": [
+      "storage",
+      "activeTab",
+      "scripting",
+      "notifications",
+      "alarms"
+   ],
+   "action": {
+      "default_popup": "src/dashboard/dashboard.html",
+      "default_icon": {
+         "16": "images/icons/Logo_16x16.png",
+         "48": "images/icons/Logo_48x48.png",
+         "128": "images/icons/Logo_128x128.png"
+      },
+      "default_title": "OmniOptimizer"
+   },
+   "background": {
+      "service_worker": "src/optimizer.js",
+      "type": "module"
+   },
+   "content_scripts": [
+      {
+         "js": [
+            "src/bridge.js"
+         ],
+         "matches": [
+            "<all_urls>"
+         ],
+         "run_at": "document_end"
+      }
+   ],
+   "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline'; img-src 'self' https://img.buymeacoffee.com data:;"
+   },
+   "host_permissions": [ "*://*/*" ],
+
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.1.7",
+   "web_accessible_resources": [
+      
+   
+   ]
+}

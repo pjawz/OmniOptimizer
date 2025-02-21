@@ -1,0 +1,187 @@
+<!-- dashboard.html  -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/bootstrap/icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/libs/bootstrap-table/css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- Updated Inline Header -->
+        <div class="topHeader" style="display: flex; align-items: flex-start; justify-content: space-between; padding: 10px;">
+            <div id="topLogo" style="margin-right: 20px;">
+            <a href="#" target="_blank" class="d-flex align-items-center text-dark text-decoration-none">
+                <img class="headline" src="/images/icons/OmniOptimizerLogoDark.png" alt="OmniOptimizer logo">
+            </a>
+            </div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-bottom: 0; margin-right: 20px;">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true" data-i18n="home">
+                Home
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports-tab-pane" type="button" role="tab" aria-controls="reports-tab-pane" aria-selected="false" data-i18n="reports">
+                Reports
+                </button>
+            </li>
+            </ul>
+            <!-- Updated Algorithm Selection Inline Div -->
+            <div id="algorithm-selection-inline" style="margin-top: 0; font-size: 0.9em; margin-right: 20px;">
+            <select class="form-select" id="algorithmSelect" style="width: auto; display: inline-block; vertical-align: middle;">
+                <option value="genetic" selected data-i18n="geneticAlgorithm">Genetic Algorithm</option>
+                <option value="traversal" data-i18n="traversalAlgorithm">Traversal Algorithm</option>
+                <option value="bayesian" data-i18n="bayesianAlgorithm">Bayesian Algorithm</option>
+            </select>
+            </div>
+        </div>
+        <!-- End Updated Inline Header -->
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                <!-- Removed Notification Banner -->
+                <!-- Modal -->
+                <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="infoModalLabel" data-i18n="parameterInputs">Parameter Inputs</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="parameter-explanation">
+                                    <h3 data-i18n="parameterInputsExplanation">Parameter Inputs Explanation 📝</h3>
+                                    <ul>
+                                        <li>
+                                            <p style="margin-top: 10px; color: #FF6347;" data-i18n="tradingViewWarning">
+                                                ⚠️ Starting 2025, TradingView will enforce stricter access controls. We recommend keeping parameters under 35,000. For large sets, test with broad intervals first, then narrow ones.
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <b data-i18n="startValue">Start Value</b>
+                                            🌟: <span data-i18n="startValueDescription">The start value must be greater than 0. It cannot be less than 0.</span>
+                                        </li>
+                                        <li>
+                                            <b data-i18n="endValue">End Value</b>
+                                            🏁: <span data-i18n="endValueDescription">The end value must be greater than 0. It cannot be less than or equal to 0.</span>
+                                        </li>
+                                        <li>
+                                            <b data-i18n="stepSize">Step Size</b>
+                                            📏: <span data-i18n="stepSizeDescription">The step size must be greater than 0 and consistent with the step size used in TradingView strategies.</span>
+                                        </li>
+                                        <li>
+                                            <b data-i18n="valueRelationship">Value Relationship</b>
+                                            🔗: <span data-i18n="valueRelationshipDescription">The start value must be less than the end value to ensure a valid range.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="EstimatedTime">
+                    <div class="row">
+                        <div class="CountCol">
+                            <p id="predictTimeDisplay">
+                                <span id="predictTimeElement"></span>
+                            </p>
+                            <p id="totalCountDisplay">
+                                <span id="totalCountElement"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row rowButton">
+                        <div id="resetButton">
+                            Reset Estimated End Time
+                            <span id="closeResetButton" style="cursor:pointer;">&times;</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Parameter Inputs (Removed Card Wrapper) -->
+                <div id="parameters">
+                    <div class="row g-2 pb-2">
+                        <div class="align-bottom">
+                            <label for="inputStart1" class="form-label">1. Parameter</label>
+                            <span class="bi-info-circle" data-bs-toggle="modal" data-bs-target="#infoModal"></span>
+                            <div class="input-group">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="roundCheckbox">
+                                    <span class="checkmark" data-i18n="skip">Skip</span>
+                                </label>
+                                <input id="inputStart" type="text" aria-label="Start" placeholder="Start (Can't be < 0)" class="form-control inputWindow">
+                                <input id="inputEnd" type="text" aria-label="End" placeholder="End (Must be > start)" class="form-control inputWindow">
+                                <input id="inputStep" type="text" aria-label="Step" placeholder="Step ( > 0,= script step)" class="form-control inputWindow">
+                                <input id="inputDefault" type="text" aria-label="Default" placeholder="⚠️ Set default value (≥0) to skip" class="form-control inputWindow" style="display:none;">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Parameter Inputs and Algorithm Selection -->
+
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <button type="button" class="btn btn-dark btn-sm NHbtn" id="addParameter" data-i18n="addParameter">Add Parameter</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-dark float-end NHbtn" id="optimize" data-i18n="optimize">Optimize</button>
+                            <button type="button" class="btn btn-secondary float-end NHbtn" id="cancelOptimize" style="display:none;" data-i18n="cancelOptimize">Cancel Optimize</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="reports-tab-pane" role="tabpanel" aria-labelledby="reports-tab" tabindex="0">
+                <div class="container-fluid">
+                    <div class="toolbar">
+                        <button id="refresh" class="btn btn-dark NHbtn">
+                            <span data-i18n="loadResults">Load Results</span>
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </button>
+                    </div>
+                    <table id="table" data-sortable="true" data-search="true" data-pagination="true" data-page-size="5" data-toolbar=".toolbar" data-show-columns="true" data-sort-name="date" data-sort-order="desc" data-buttons-prefix="btn-sm btn" data-search-align="left">
+                        <thead>
+                            <tr>
+                                <th data-field="strategyID" data-visible="false" data-i18n="id">ID</th>
+                                <th data-field="strategyName" data-sortable="true" data-cell-style="strategyNameColumnStyle" data-i18n="name">Name</th>
+                                <th data-field="date" data-sortable="true" data-sorter="dateSorter" data-i18n="date">Date</th>
+                                <th data-field="symbol" data-sortable="true" data-sorter="dateSorter" data-cell-style="symbolColumnStyle" data-i18n="symbol">Symbol</th>
+                                <th data-field="timePeriod" data-sortable="false" data-i18n="period">Period</th>
+                                <th data-field="parameters" data-sortable="false" data-cell-style="parametersColumnStyle" data-i18n="parameters">Parameters</th>
+                                <th data-field="maxprofit" data-sortable="true" data-cell-style="maxProfitColumnStyle" data-i18n="maxProfit">Max Profit</th>
+                                <th data-field="detail" data-sortable="false" data-cell-style="reportDetailButtonStyle" data-events="openReportDetail" data-i18n="reportDetail">Report Detail</th>
+                            </tr>
+                        </thead>
+                        <tbody id="this">
+                            <tr id="this">
+                                <td>
+                                    <button id="report-detail-button" type="button" class="btn btn-dark btn-sm">
+                                        Open
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid footer">
+            <footer id="nhfooter" class="d-flex flex-wrap justify-content-center align-items-center py-3 mb-1 mt-1"></footer>
+            <p class="tradingviewUsage text-muted footerText">
+                <span>Made with ❤️ by OmniOptimizer</span>
+            </p>
+            </footer>
+        </div>
+
+        <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+        <script src="/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/libs/bootstrap-table/js/bootstrap-table.min.js"></script>
+        <script src="dashboard.js"></script>
+</body>
+
+</html>

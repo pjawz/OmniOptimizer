@@ -1,0 +1,104 @@
+/* Base layout */
+.report-detail {
+    padding-left: 7rem !important;
+    padding-right: 7rem !important;
+}
+
+/* Update overall styling for a futuristic modern look */
+body {
+    background: linear-gradient(135deg, #232526, #414345);
+    color: #e0e0e0;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+/* Header logo image remains but clean up any theme-specific colors */
+#reportImg {
+    filter: brightness(0) invert(1);
+}
+
+/* Remove dark mode specific rules and update table headers with semi-transparency */
+table#table th {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+/* Update alternating row colors */
+table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+table tr:nth-child(odd) {
+    background-color: transparent;
+}
+
+/* Button styling */
+button, .btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    transition: background-color 0.2s;
+}
+button:hover, .btn:hover {
+    background-color: #444;
+}
+
+/* Footer styles */
+footer, .footer {
+    background-color: transparent;
+    color: #ccc;
+}
+
+/* 图标和按钮样式 */
+#download-report i {
+  margin-right: 0.2rem;
+}
+
+button.btn.btn-secondary.dropdown-toggle {
+  background-color: #222222;
+}
+
+/* 分页样式 */
+li.page-item.active > a.page-link,
+a.dropdown-item.active {
+  background-color: #666666;
+  border: 1px solid #666666; /* 如果适用于 a.dropdown-item.active */
+  color: #ffffff;
+}
+
+li.page-item > a.page-link {
+  color: #222222;
+}
+
+/* 表格样式 */
+/* 设置表格第一行的背景颜色 */
+table#table th {
+  background-color: #dddddd;
+}
+
+/* 设置表格相邻两行的不同背景颜色，例如白色和浅灰色交替 */
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+table tr:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+header {
+  position: relative;
+}
+
+#ReportThemeToggle {
+  position: absolute;
+  top: 8px;
+  right: 0;
+}
+
+#ReportThemeToggle {
+  background-color: #ffffff;
+}
+
+#ReportThemeToggle:hover {
+  background-color: #d3d4d5;
+}
+
+/* Remove any rules specific to dark mode */
