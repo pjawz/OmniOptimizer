@@ -1,27 +1,9 @@
 {
-   "manifest_version": 3,
-   "name": "OmniOptimizer",
-   "description": "OmniOptimizer leverages algorithmic optimization to dynamically refine trading strategies and perfect performance.",
-   "default_locale": "en",
-   "permissions": [
-      "storage",
-      "activeTab",
-      "scripting",
-      "notifications",
-      "alarms"
-   ],
    "action": {
-      "default_popup": "src/dashboard/dashboard.html",
-      "default_icon": {
-         "16": "images/icons/Logo_16x16.png",
-         "48": "images/icons/Logo_48x48.png",
-         "128": "images/icons/Logo_128x128.png"
-      },
-      "default_title": "OmniOptimizer"
+      "default_popup": "src/dashboard/dashboard.html"
    },
    "background": {
-      "service_worker": "src/optimizer.js",
-      "type": "module"
+      "service_worker": "src/optimizer.js"
    },
    "content_scripts": [
       {
@@ -37,12 +19,41 @@
    "content_security_policy": {
       "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline'; img-src 'self' https://img.buymeacoffee.com data:;"
    },
-   "host_permissions": [ "*://*/*" ],
-
+   "default_locale": "en",
+   "description": "OmniOptimizer leverages algorithmic optimization to dynamically refine trading strategies and perfect performance.",
+   "host_permissions": [
+      "<all_urls>"
+   ],
+   "icons": {
+      "128": "images/icons/Logo_128x128.png",
+      "16": "images/icons/Logo_16x16.png",
+      "32": "images/icons/Logo_32x32.png",
+      "48": "images/icons/Logo_48x48.png"
+   },
+   "manifest_version": 3,
+   "name": "OmniOptimizer",
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.1.7",
+   "permissions": [
+      "storage",
+      "activeTab",
+      "scripting",
+      "notifications",
+      "alarms"
+   ],
+   "version": "2.3.8",
    "web_accessible_resources": [
-      
-   
+      {
+         "js": [
+            "bridge.js"
+         ],
+         "matches": [
+            "https://*.tradingview.com/*",
+            "http://localhost:3000/*",
+            "http://localhost:4000/*"
+         ],
+         "resources": [
+            "src/controller.js"
+         ]
+      }
    ]
 }
