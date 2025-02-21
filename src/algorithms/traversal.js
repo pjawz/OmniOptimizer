@@ -48,4 +48,3 @@ export async function iterateRanges(
 		);
 	}
 }
-// ...existing code if needed...

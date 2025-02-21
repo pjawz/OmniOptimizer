@@ -9,7 +9,11 @@
  *
  ********************************************************************/
 
+// Added JSDoc comments to the Optimizer class and its functions
 class Optimizer {
+	/**
+	 * Creates an instance of Optimizer and binds Chrome event listeners.
+	 */
 	constructor() {
 		// Bind listeners for various Chrome events
 		chrome.runtime.onMessage.addListener(this.onMessageReceived.bind(this));
@@ -19,10 +23,8 @@ class Optimizer {
 	}
 
 	/**
-	 * Listener for setting the selected optimization algorithm.
-	 * Receives a message with a new algorithm and updates internal storage.
-	 *
-	 * @param {Object} message - The message object received.
+	 * Handles messages to set the selected optimization algorithm.
+	 * @param {Object} message - The message object received containing algorithm data.
 	 * @param {Object} sender - Information about the sender.
 	 * @param {Function} sendResponse - Callback to send a response.
 	 */
@@ -35,8 +37,7 @@ class Optimizer {
 	}
 
 	/**
-	 * Performs optimization based on the selected algorithm stored in local storage.
-	 * Retrieves the algorithm setting and logs the corresponding optimization process.
+	 * Retrieves the selected algorithm from storage and performs optimization accordingly.
 	 */
 	performOptimization() {
 		chrome.storage.local.get("selectedAlgorithm", (data) => {
@@ -49,13 +50,11 @@ class Optimizer {
 	}
 
 	/**
-	 * Message listener responsible for storing data into local storage.
-	 * Returns success status after storing the received data.
-	 *
+	 * Stores incoming data into local storage and sends a success response.
 	 * @param {Object} request - The request object containing data.
 	 * @param {Object} sender - Information about the sender.
 	 * @param {Function} sendResponse - Callback to send a response.
-	 * @returns {boolean} Returns true to indicate asynchronous response.
+	 * @returns {boolean} True for asynchronous response handling.
 	 */
 	onDataMessageReceived(request, sender, sendResponse) {
 		chrome.storage.local.set({ data: request.data }, () => {
@@ -65,8 +64,7 @@ class Optimizer {
 	}
 
 	/**
-	 * Initializes the state for user parameters upon termination or system startup.
-	 * Sets default values for user parameter count and input parameters.
+	 * Initializes the state for user parameters on startup.
 	 */
 	setupInitialState() {
 		chrome.storage.local.set({
@@ -78,11 +76,9 @@ class Optimizer {
 	}
 
 	/**
-	 * Listens for changes in local storage specifically for the selected algorithm.
-	 * Logs any changes to the selected algorithm.
-	 *
-	 * @param {Object} changes - The object containing changes in storage.
-	 * @param {string} namespace - The namespace in which the change occurred.
+	 * Handles changes in storage for the selected algorithm and logs the update.
+	 * @param {Object} changes - Object containing new and old values.
+	 * @param {string} namespace - The namespace where the change occurred.
 	 */
 	onStorageChanged(changes, namespace) {
 		if (namespace === "local" && changes.selectedAlgorithm) {
@@ -95,21 +91,23 @@ class Optimizer {
 // Create an instance to preserve backwards compatibility
 const optimizer_instance = new Optimizer();
 
-// Global function to perform optimization, accessible throughout the app
-function performOptimization() {
+/**
+ * Global function to perform optimization using the Optimizer instance.
+ */
+const performOptimization = () => {
 	optimizer_instance.performOptimization();
-}
+};
 
-// Add this listener to open a persistent window instead of a popup
+// Listener to open a persistent window instead of a popup
 chrome.action.onClicked.addListener(() => {
 	chrome.windows.create(
 		{
-			url: "src/dashboard.html", // Create this file in your project folder
+			url: "src/dashboard.html",
 			type: "popup",
 			width: 720,
 			height: 600,
 		},
-		function (newWindow) {
+		(newWindow) => {
 			console.log("Persistent window opened:", newWindow);
 		}
 	);

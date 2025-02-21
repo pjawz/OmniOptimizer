@@ -1,24 +1,35 @@
-// Create a Proxy object to get the value of strategyID from URL parameters.
+/**
+ * @file reports.js
+ * @description Processes and retrieves report data from storage using a strategy ID passed via URL parameters.
+ */
+
+// Create a Proxy to retrieve URL parameters using ES6 features
 const params = new Proxy(new URLSearchParams(window.location.search), {
 	get: (searchParams, prop) => searchParams.get(prop),
 });
 
-// Get the value of strategyID
+// Retrieve strategyID from URL parameters
 let strategyID = params.strategyID;
 
-document.addEventListener("DOMContentLoaded", function () {
-	// Apply initial theme settings
+/**
+ * DOMContentLoaded event callback to initialize report page.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+	// Apply initial theme settings if needed
 	// Removed: applyThemeSettings();
 });
 
-// Get report data related to strategyID from local storage
-chrome.storage.local.get("report-data-" + strategyID, function (item) {
-	var reportDetailData = [];
-	var values = Object.values(item)[0].reportData;
+/**
+ * Retrieves report data from Chrome storage for the given strategyID and processes it.
+ * @param {Object} item - The object returned by chrome.storage.local.get containing report data.
+ */
+chrome.storage.local.get("report-data-" + strategyID, (item) => {
+	let reportDetailData = [];
+	const values = Object.values(item)[0].reportData;
 
 	// Iterate over report data and convert format
 	for (const [key, value] of Object.entries(values)) {
-		var reportDetail = {
+		const reportDetail = {
 			parameters: key,
 			netProfitAmount: value.netProfit.amount,
 			netProfitPercent: value.netProfit.percent,
@@ -35,7 +46,7 @@ chrome.storage.local.get("report-data-" + strategyID, function (item) {
 	}
 
 	// Create a Bootstrap table to display the data
-	var $table = $("#table");
+	const $table = $("#table");
 	$table.bootstrapTable("showLoading");
 
 	// Load report data and hide loading state after 250 milliseconds
@@ -53,7 +64,8 @@ chrome.storage.local.get("report-data-" + strategyID, function (item) {
 	});
 });
 
-// Function to download CSV report
+// JSDoc: Downloads the CSV report using report detail data
+// @param {Array} reportDetailData - Array of report detail objects
 function downloadCSVReport(reportDetailData) {
 	chrome.storage.local.get("report-data-" + strategyID, function (item) {
 		const reportData = item["report-data-" + strategyID];
@@ -77,20 +89,22 @@ function downloadCSVReport(reportDetailData) {
 	});
 }
 
-// Function to convert report data to CSV format
+// JSDoc: Converts an array of report detail objects to a CSV formatted string
+// @param {Array} reportDetailData - Array of report detail objects
+// @returns {string} CSV formatted string
 function convertReportToCSV(reportDetailData) {
 	const keys = Object.keys(reportDetailData[0]);
-	var result =
+	let result =
 		keys
 			.map((key) => {
 				return key.toUpperCase();
 			})
 			.join(",") + "\n";
 
-	for (var i = 0; i < reportDetailData.length; i++) {
-		var line = [];
-		for (var j = 0; j < keys.length; j++) {
-			var value = reportDetailData[i][keys[j]];
+	for (let i = 0; i < reportDetailData.length; i++) {
+		const line = [];
+		for (let j = 0; j < keys.length; j++) {
+			let value = reportDetailData[i][keys[j]];
 			// If the value is a string and contains a comma, enclose it in double quotes to preserve format
 			if (typeof value === "string" && value.indexOf(",") !== -1) {
 				value = '"' + value + '"';
@@ -102,12 +116,15 @@ function convertReportToCSV(reportDetailData) {
 	return result;
 }
 
-// Custom sort function to handle non-numeric characters and negative values
+// JSDoc: Custom sort function that handles non-numeric characters and negative values
+// @param {string} sortName - The key to sort by
+// @param {string} sortOrder - Sort order: 'asc' or 'desc'
+// @param {Array} data - Array of objects to be sorted
 function customSort(sortName, sortOrder, data) {
-	var order = sortOrder === "desc" ? -1 : 1;
+	const order = sortOrder === "desc" ? -1 : 1;
 	data.sort(function (a, b) {
-		var aa = "";
-		var bb = "";
+		let aa = "";
+		let bb = "";
 		// Use regular expression to check for negative numbers and reconstruct and remove non-numeric characters
 		if (a[sortName].charAt(0).match(/\D/) != null) {
 			aa = "-" + a[sortName].substring(1, a[sortName].length);
