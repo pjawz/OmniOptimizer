@@ -1,4 +1,4 @@
-![OmniOptimizer Logo](/images/icons/OmniOptimizerLogo.png)
+![OmniOptimizer Logo](/images/icons/OmniOptimizerLogoDark.png)
 
 # OmniOptimizer: The Ultimate Trading Strategy Optimizer
 
