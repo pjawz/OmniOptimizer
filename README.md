@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # OmniOptimizer Tradingview Strategy Optimizer Extension
 
 OmniOptimizer Extension is a Chrome extension designed to optimize trading strategies on TradingView. It interacts with the webpage's DOM and communicates with background scripts to manage optimization processes and store results.
@@ -37,3 +38,7 @@ OmniOptimizer Extension is a Chrome extension designed to optimize trading strat
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+=======
+# OmniOptimizer
+An Algorithmic TradingView Strategy Optimizer Chrome Extension
+>>>>>>> d5222f99903fbb9f5e23dbc1d7d741dedb2223fe
