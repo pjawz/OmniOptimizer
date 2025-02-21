@@ -1,20 +1,38 @@
+:root {
+	/* Common Variables - updated for a cooler, dark theme */
+	--font-family-primary: "Roboto", Arial, sans-serif;
+	--primary-bg-gradient: linear-gradient(135deg, #1e293b, #0f172a);
+	--text-color: #637492;
+	--placeholder-color: #3b82f6;
+	--btn-transition: 0.3s ease-in-out;
+	--btn-cancel-bg: #ef4444;
+	--btn-cancel-bg-hover: #dc2626;
+	--btn-bg-secondary: #475569;
+	--input-bg: rgba(255, 255, 255, 0.1);
+	--input-border: rgba(255, 255, 255, 0.2);
+	--nav-link-bg: rgba(255, 255, 255, 0.05);
+	--nav-link-active-bg: rgba(255, 255, 255, 0.1);
+	--nav-link-text-color: #9ca3af;
+	--card-bg: #1f2937;
+	--card-shadow: rgba(0, 0, 0, 0.5);
+}
+
 /* New Font & Global Styles */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 /* popup.css */
 #inputDefault::placeholder {
-	color: #f23645; /* Set placeholder text color to red */
+	color: var(--placeholder-color); /* Use variable for placeholder text color */
 }
 /* Basic layout styles */
 body {
-	width: 720px;
-	min-height: 600px; /* <-- New: sets the popup to be at least 800px tall */
-	transition: all 0.2s ease-in-out;
-	background: linear-gradient(135deg, #1f1c2c, #928dab);
-	color: #fff;
-	font-family: "Roboto", Arial, sans-serif;
+	width: auto;
+	height: auto; /* Sets the body to adjust height dynamically */
+	transition: background 0.3s ease, color 0.3s ease;
+	background: var(--primary-bg-gradient);
+	color: var(--text-color);
+	font-family: var(--font-family-primary);
 	margin: 0;
 	padding: 0;
-	transition: all 0.3s ease;
 }
 .EstimatedTime {
 	padding-left: 12px;
@@ -22,7 +40,7 @@ body {
 }
 .btn {
 	/* Set transition effect */
-	transition: transform 0.3s ease;
+	transition: transform var(--btn-transition), box-shadow var(--btn-transition);
 	border-radius: 6px;
 	padding: 8px 16px;
 	border: none;
@@ -35,7 +53,8 @@ body {
 	--bs-btn-focus-shadow-rgb: transparent;
 }
 .btn:hover {
-	transform: translateY(-1px);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 #optimize,
 #cancelOptimize,
@@ -44,12 +63,12 @@ body {
 	font-weight: 500;
 }
 #cancelOptimize {
-	background-color: #dc3545;
+	background-color: var(--btn-cancel-bg);
 	border: none;
-	color: #fff;
+	color: var(--text-color);
 }
 #cancelOptimize:hover {
-	background-color: #c82333;
+	background-color: var(--btn-cancel-bg-hover);
 }
 
 select:hover,
@@ -88,17 +107,18 @@ input:hover {
 }
 
 #themeToggle {
-	/*    padding: 0px; */
 	z-index: 1000;
-	background-color: #e4e6eb;
+	background-color: #f0f0f0;
 	border: none;
 	border-radius: 50%;
 	width: 40px;
 	height: 40px;
-	transition: background-color 0.2s, transform 0.2s;
+	transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 #themeToggle:hover {
 	transform: scale(1.1);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 #themeToggle:active {
 	transform: scale(0.85);
@@ -107,11 +127,12 @@ input:hover {
 .topHeader {
 	display: flex;
 	flex-direction: row;
-	align-items: flex-start; /* changed from center to flex-start */
+	align-items: center;
 	justify-content: space-between;
-	padding: 10px 10px;
+	padding: 12px 20px;
 	width: 100%;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	background-color: rgba(0, 0, 0, 0.2);
 }
 .topHeader > .tab-content {
 	width: 100%;
@@ -123,8 +144,8 @@ input:hover {
 }
 
 .btn-sm.btn.btn-sm.btn-secondary.dropdown-toggle {
-	background-color: #212529;
-	border: 1px solid #212529;
+	background-color: var(--btn-bg-secondary);
+	border: 1px solid var(--btn-bg-secondary);
 }
 /* Toolbar styles */
 .toolbar {
@@ -148,10 +169,10 @@ table#table tbody {
 	margin-left: 8px !important;
 	border-radius: 4px !important;
 	padding: 6px 8px;
-	border: 1px solid rgba(255, 255, 255, 0.3);
-	background-color: rgba(255, 255, 255, 0.1);
-	color: #fff;
-	transition: border-color 0.2s;
+	border: 1px solid var(--input-border);
+	background-color: var(--input-bg);
+	color: var(--text-color);
+	transition: border-color 0.3s ease;
 }
 
 .inputWindow:focus {
@@ -164,7 +185,7 @@ table#table tbody {
 }
 /* Footer styles */
 #nhfooter {
-	border-top: 1px solid rgba(255, 255, 255, 0.3);
+	border-top: 1px solid var(--input-border);
 	font-size: 13px;
 	padding: 8px 10px 4px 10px !important;
 	margin-top: 10px !important;
@@ -184,7 +205,7 @@ table#table tbody {
 	display: flex;
 	flex-wrap: nowrap;
 	margin-bottom: 0;
-	border-bottom: none; /* Remove the bottom border of the nav-tabs */
+	border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-item {
@@ -195,13 +216,13 @@ table#table tbody {
 .nav-link {
 	padding: 8px 16px;
 	margin: 0 4px;
-	border-radius: 6px;
-	color: #ccc !important;
-	transition: background-color 0.2s, transform 0.2s;
-	border: none; /* Remove the border of the nav-link */
-	box-shadow: none; /* Remove the box-shadow of the nav-link */
-	margin-bottom: 0; /* Remove the margin-bottom of the nav-link */
-	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: 4px;
+	color: var(--nav-link-text-color) !important;
+	transition: background-color 0.3s, transform 0.2s;
+	border: none;
+	box-shadow: none;
+	margin-bottom: 0;
+	background-color: var(--nav-link-bg);
 }
 
 .page-link {
@@ -215,18 +236,16 @@ table#table tbody {
 }
 
 .nav-link.active {
-	background-color: rgba(255, 255, 255, 0.2);
-	color: #fff !important;
-	box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
-	border: none; /* Remove the border of the active nav-link */
-	box-shadow: none; /* Remove the box-shadow of the active nav-link */
+	background-color: var(--nav-link-active-bg);
+	color: var(--text-color) !important;
+	/* Removed repeated box-shadow rules */
 }
 .nav-link:active {
 	transform: scale(0.95) !important;
 }
 .nav-link:hover {
 	transform: translateY(-2px);
-	background-color: rgba(255, 255, 255, 0.15);
+	background-color: rgba(255, 255, 255, 0.1);
 }
 /* checkbox styles */
 .custom-checkbox {
@@ -253,12 +272,25 @@ button#report-detail-button {
 	margin-right: 0.4rem;
 }
 
-/* Function button sizes */
+/* Function button sizes - updated for responsiveness */
 #cancelOptimize,
 #addParameter,
 #optimize {
 	height: 40px;
-	width: 320px;
+	flex: 1;
+	min-width: 120px;
+	max-width: 200px;
+}
+
+/* Container for bottom buttons - ensures they stay on the same row and wrap on smaller screens */
+.control-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 .align-bottom {
@@ -272,8 +304,8 @@ button#report-detail-button {
 	border: 1px solid #6c757d;
 	background-color: #eeeeee;
 	display: none;
-	align-items: center; /* Vertically center */
-	justify-content: center; /* Horizontally center */
+	align-items: center;
+	justify-content: center;
 	border-radius: 8px;
 	height: 40px;
 	position: relative;
@@ -281,7 +313,6 @@ button#report-detail-button {
 	transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 #resetButton:hover {
-	/*  background-color: #222222; */
 	transform: scale(1.01);
 	border: 1px solid #222222;
 	color: #222222;
@@ -297,11 +328,11 @@ button#report-detail-button {
 }
 
 .dropdown-menu {
-	background-color: #222222; /* 深色背景 */
+	background-color: #222222;
 }
 
 .dropdown-menu label {
-	color: #ffffff; /* 深色背景 */
+	color: #ffffff;
 }
 
 div.CountCol {
@@ -310,23 +341,14 @@ div.CountCol {
 	height: auto;
 }
 
-.control-buttons {
-	display: flex;
-	flex-direction: column; /* Vertical stacking */
-	align-items: center; /* Horizontal centering */
-	justify-content: center; /* Vertical centering */
-	gap: 2px; /* Spacing between elements */
-	padding-top: 10px; /* Top padding */
-	padding-bottom: 10px; /* Bottom padding */
-}
-
 /* Card Layout for Sections */
 .card {
-	background-color: #fff;
+	background-color: var(--card-bg);
 	border-radius: 8px;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 12px var(--card-shadow);
 	margin: 15px 10px;
 	padding: 15px;
+	transition: box-shadow 0.3s ease;
 }
 .card-header {
 	font-weight: 500;
@@ -337,4 +359,7 @@ div.CountCol {
 }
 .card-body {
 	padding: 10px 0;
+}
+.card:hover {
+	box-shadow: 0 6px 16px var(--card-shadow);
 }

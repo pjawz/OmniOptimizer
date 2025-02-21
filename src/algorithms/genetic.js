@@ -1,3 +1,22 @@
+/**
+ * @file genetic.js
+ * @description This file contains the implementation of a genetic algorithm for optimizing parameters.
+ * The algorithm initializes a population, selects the best individuals, performs crossover and mutation,
+ * and iterates through generations to find the optimal solution.
+ *
+ * @module genetic
+ */
+
+/**
+ * Iterates through generations using a genetic algorithm to optimize parameters.
+ * @param {number} population_size - The size of the population.
+ * @param {Array<Object>} user_inputs - An array of parameter objects with 'start', 'end', and 'stepSize'.
+ * @param {number} max_iterations - The maximum number of iterations (generations).
+ * @param {number} mutation_probability - The probability of mutation occurring in an individual.
+ * @param {Array<Object>} optimization_results - The array to store optimization results.
+ * @param {Function} fitness_function - The function to evaluate the fitness of an individual.
+ * @returns {Promise<Array<number>>} The best individual found after the iterations.
+ */
 export async function iterateGenetic(
 	population_size,
 	user_inputs,
@@ -6,6 +25,12 @@ export async function iterateGenetic(
 	optimization_results,
 	fitness_function
 ) {
+	/**
+	 * Initializes the population with random individuals.
+	 * @param {number} population_size - The size of the population.
+	 * @param {Array<Object>} user_inputs - An array of parameter objects.
+	 * @returns {Array<Array<number>>} The initialized population.
+	 */
 	function initializePopulation(population_size, user_inputs) {
 		const population = [];
 		for (let i = 0; i < population_size; i++) {
@@ -25,6 +50,12 @@ export async function iterateGenetic(
 		}
 		return population;
 	}
+
+	/**
+	 * Selects the best individuals from the population based on their fitness.
+	 * @param {Array<Array<number>>} population - The current population.
+	 * @param {number} population_size - The size of the population.
+	 */
 	async function selection(population, population_size) {
 		const item_length = population[0].length;
 		for (const element of population) {
@@ -36,6 +67,13 @@ export async function iterateGenetic(
 		population.sort((a, b) => b[item_length - 1] - a[item_length - 1]);
 		population.splice(population_size, population.length);
 	}
+
+	/**
+	 * Performs crossover between two parent individuals to produce a child.
+	 * @param {Array<number>} parent1 - The first parent individual.
+	 * @param {Array<number>} parent2 - The second parent individual.
+	 * @returns {Array<number>} The child individual.
+	 */
 	function crossover(parent1, parent2) {
 		const child = [];
 		const item_length = parent1.length;
@@ -47,6 +85,12 @@ export async function iterateGenetic(
 		child.push(0);
 		return child;
 	}
+
+	/**
+	 * Mutates an individual by randomly changing its parameters.
+	 * @param {Array<number>} individual - The individual to mutate.
+	 * @param {Array<Object>} user_inputs - An array of parameter objects.
+	 */
 	function mutation(individual, user_inputs) {
 		for (let i = 0; i < individual.length - 1; i++) {
 			const element = user_inputs[i];
@@ -58,6 +102,7 @@ export async function iterateGenetic(
 			individual[i] = Number((start + Math.random() * (end - start)).toFixed(decimal_places));
 		}
 	}
+
 	let best_individual;
 	let population = initializePopulation(population_size, user_inputs);
 	for (let i = 0; i < max_iterations; i++) {
@@ -87,4 +132,3 @@ export async function iterateGenetic(
 	}
 	return best_individual;
 }
-// ...existing code if needed...

@@ -1,3 +1,26 @@
+/**
+ * Iterates over a range of values for each user input and performs optimization.
+ *
+ * @async
+ * @function iterateRanges
+ * @param {Array<Object>} user_inputs - Array of user input objects containing start, end, and stepSize.
+ * @param {Array<Object>} optimization_results - Array to store the results of the optimization.
+ * @param {number} index - The current index of the user input being processed.
+ * @param {Function} change_tv_input - Function to change the input value in the TV interface.
+ * @param {Function} sleep - Function to pause execution for a specified duration.
+ * @param {Function} OptimizeParams - Function to perform the optimization with the current parameters.
+ * @returns {Promise<void>} - A promise that resolves when the iteration and optimization are complete.
+ *
+ * @throws {Error} If an error occurs during the optimization process.
+ *
+ * @example
+ * const user_inputs = [
+ *   { start: 0, end: 10, stepSize: 1 },
+ *   { start: 0, end: 5, stepSize: 0.5 }
+ * ];
+ * const optimization_results = [];
+ * await iterateRanges(user_inputs, optimization_results, user_inputs.length - 1, change_tv_input, sleep, OptimizeParams);
+ */
 export async function iterateRanges(
 	user_inputs,
 	optimization_results,

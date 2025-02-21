@@ -31,13 +31,18 @@
 	"version": "2.3.8",
 	"web_accessible_resources": [
 		{
-			"js": ["bridge.js"],
-			"matches": [
+				"matches": [
 				"https://*.tradingview.com/*",
 				"http://localhost:3000/*",
 				"http://localhost:4000/*"
 			],
-			"resources": ["src/controller.js"]
+			"resources": [
+				"src/controller.js",
+				"src/utils/listeners.js",
+				"src/utils/utils.js",
+				"src/algorithms/algorithm_manager.js"
+			],
+			"js": ["bridge.js"]
 		}
 	]
 }

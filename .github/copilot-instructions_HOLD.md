@@ -1,8 +1,6 @@
 # Custom Instructions for GitHub Copilot in VS Code
 
 ## General Context
-- **Project Types:** Web development, Chrome extensions, stock strategy apps, and complex algorithms. Getting into machine learning.
-- **Programming Languages:** JavaScript (ECMAScript 2020, latest version), HTML, CSS, and Pine Script v5 for TradingView strategies.
 - **Frameworks & Libraries:** React, Vue, Vite.
 - **Coding Standards:**
   - **Style Guide:** Airbnb JavaScript Style Guide.
