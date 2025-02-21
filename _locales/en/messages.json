@@ -1,102 +1,102 @@
 {
-    "addParameter": {
-        "message": "Add Parameter"
-    },
-    "cancelOptimize": {
-        "message": "Cancel Optimize"
-    },
-    "date": {
-        "message": "Date"
-    },
-    "endValue": {
-        "message": "End Value"
-    },
-    "endValueDescription": {
-        "message": "The end value must be greater than 0. It cannot be less than or equal to 0."
-    },
-    "geneticAlgorithm": {
-        "message": "Genetic Algorithm"
-    },
-    "home": {
-        "message": "Home"
-    },
-    "id": {
-        "message": "ID"
-    },
-    "loadResults": {
-        "message": "Load Results"
-    },
-    "maxProfit": {
-        "message": "Max Profit"
-    },
-    "name": {
-        "message": "Name"
-    },
-    "optimizationAlgorithm": {
-        "message": "Algorithm:"
-    },
-    "optimize": {
-        "message": "Optimize"
-    },
-    "parameterInputs": {
-        "message": "Parameter Inputs"
-    },
-    "parameterInputsExplanation": {
-        "message": "Parameter Inputs Explanation 📝"
-    },
-    "parameters": {
-        "message": "Parameters"
-    },
-    "period": {
-        "message": "Period"
-    },
-    "reportDetail": {
-        "message": "Report Detail"
-    },
-    "reports": {
-        "message": "Reports"
-    },
-    "skip": {
-        "message": "Skip"
-    },
-    "startValue": {
-        "message": "Start Value"
-    },
-    "startValueDescription": {
-        "message": "The start value must be greater than 0. It cannot be less than 0."
-    },
-    "stepSize": {
-        "message": "Step Size"
-    },
-    "stepSizeDescription": {
-        "message": "The step size must be greater than 0 and consistent with the step size used in TradingView strategies."
-    },
-    "valueRelationship": {
-        "message": "Value Relationship"
-    },
-    "valueRelationshipDescription": {
-        "message": "The start value must be less than the end value to ensure a valid range."
-    },
-    "supportNote": {
-        "message": "This extension is only supported on the English version of"
-    },
-    "symbol": {
-        "message": "Symbol"
-    },
-    "themeToggle": {
-        "message": "Toggle Theme"
-    },
-    "tradingViewWarning": {
-        "message": "⚠️ Starting 2025, TradingView will enforce stricter access controls. We recommend keeping parameters under 35,000. For large sets, test with broad intervals first, then narrow ones."
-    },
-    "traversalAlgorithm": {
-        "message": "Traversal Algorithm"
-    },
-    "bayesianAlgorithm": {
-        "message": "Bayesian Algorithm"
-    },
-    
-    "version": {
-        "message": "Version"
-    }
+	"addParameter": {
+		"message": "Add Parameter"
+	},
+	"cancelOptimize": {
+		"message": "Cancel Optimize"
+	},
+	"date": {
+		"message": "Date"
+	},
+	"endValue": {
+		"message": "End Value"
+	},
+	"endValueDescription": {
+		"message": "The end value must be greater than 0. It cannot be less than or equal to 0."
+	},
+	"geneticAlgorithm": {
+		"message": "Genetic Algorithm"
+	},
+	"home": {
+		"message": "Home"
+	},
+	"id": {
+		"message": "ID"
+	},
+	"loadResults": {
+		"message": "Load Results"
+	},
+	"maxProfit": {
+		"message": "Max Profit"
+	},
+	"name": {
+		"message": "Name"
+	},
+	"optimizationAlgorithm": {
+		"message": "Algorithm:"
+	},
+	"optimize": {
+		"message": "Optimize"
+	},
+	"parameterInputs": {
+		"message": "Parameter Inputs"
+	},
+	"parameterInputsExplanation": {
+		"message": "Parameter Inputs Explanation 📝"
+	},
+	"parameters": {
+		"message": "Parameters"
+	},
+	"period": {
+		"message": "Period"
+	},
+	"reportDetail": {
+		"message": "Report Detail"
+	},
+	"reports": {
+		"message": "Reports"
+	},
+	"skip": {
+		"message": "Skip"
+	},
+	"startValue": {
+		"message": "Start Value"
+	},
+	"startValueDescription": {
+		"message": "The start value must be greater than 0. It cannot be less than 0."
+	},
+	"stepSize": {
+		"message": "Step Size"
+	},
+	"stepSizeDescription": {
+		"message": "The step size must be greater than 0 and consistent with the step size used in TradingView strategies."
+	},
+	"valueRelationship": {
+		"message": "Value Relationship"
+	},
+	"valueRelationshipDescription": {
+		"message": "The start value must be less than the end value to ensure a valid range."
+	},
+	"supportNote": {
+		"message": "This extension is only supported on the English version of"
+	},
+	"symbol": {
+		"message": "Symbol"
+	},
+	"themeToggle": {
+		"message": "Toggle Theme"
+	},
+	"tradingViewWarning": {
+		"message": "⚠️ Starting 2025, TradingView will enforce stricter access controls. We recommend keeping parameters under 35,000. For large sets, test with broad intervals first, then narrow ones."
+	},
+	"traversalAlgorithm": {
+		"message": "Traversal Algorithm"
+	},
+	"bayesianAlgorithm": {
+		"message": "Bayesian Algorithm"
+	},
+
+	"version": {
+		"message": "Version"
+	}
 }

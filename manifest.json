@@ -1,59 +1,43 @@
 {
-   "action": {
-      "default_popup": "src/dashboard/dashboard.html"
-   },
-   "background": {
-      "service_worker": "src/optimizer.js"
-   },
-   "content_scripts": [
-      {
-         "js": [
-            "src/bridge.js"
-         ],
-         "matches": [
-            "<all_urls>"
-         ],
-         "run_at": "document_end"
-      }
-   ],
-   "content_security_policy": {
-      "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline'; img-src 'self' https://img.buymeacoffee.com data:;"
-   },
-   "default_locale": "en",
-   "description": "OmniOptimizer leverages algorithmic optimization to dynamically refine trading strategies and perfect performance.",
-   "host_permissions": [
-      "<all_urls>"
-   ],
-   "icons": {
-      "128": "images/icons/Logo_128x128.png",
-      "16": "images/icons/Logo_16x16.png",
-      "32": "images/icons/Logo_32x32.png",
-      "48": "images/icons/Logo_48x48.png"
-   },
-   "manifest_version": 3,
-   "name": "OmniOptimizer",
-   "update_url": "https://clients2.google.com/service/update2/crx",
-   "permissions": [
-      "storage",
-      "activeTab",
-      "scripting",
-      "notifications",
-      "alarms"
-   ],
-   "version": "2.3.8",
-   "web_accessible_resources": [
-      {
-         "js": [
-            "bridge.js"
-         ],
-         "matches": [
-            "https://*.tradingview.com/*",
-            "http://localhost:3000/*",
-            "http://localhost:4000/*"
-         ],
-         "resources": [
-            "src/controller.js"
-         ]
-      }
-   ]
+	"action": {
+		"default_popup": "src/dashboard/dashboard.html"
+	},
+	"background": {
+		"service_worker": "src/optimizer.js"
+	},
+	"content_scripts": [
+		{
+			"js": ["src/bridge.js"],
+			"matches": ["<all_urls>"],
+			"run_at": "document_end"
+		}
+	],
+	"content_security_policy": {
+		"extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline'; img-src 'self' https://img.buymeacoffee.com data:;"
+	},
+	"default_locale": "en",
+	"description": "OmniOptimizer leverages algorithmic optimization to dynamically refine trading strategies and perfect performance.",
+	"host_permissions": ["<all_urls>"],
+	"icons": {
+		"128": "images/icons/Logo_128x128.png",
+		"16": "images/icons/Logo_16x16.png",
+		"32": "images/icons/Logo_32x32.png",
+		"48": "images/icons/Logo_48x48.png"
+	},
+	"manifest_version": 3,
+	"name": "OmniOptimizer",
+	"update_url": "https://clients2.google.com/service/update2/crx",
+	"permissions": ["storage", "activeTab", "scripting", "notifications", "alarms"],
+	"version": "2.3.8",
+	"web_accessible_resources": [
+		{
+			"js": ["bridge.js"],
+			"matches": [
+				"https://*.tradingview.com/*",
+				"http://localhost:3000/*",
+				"http://localhost:4000/*"
+			],
+			"resources": ["src/controller.js"]
+		}
+	]
 }

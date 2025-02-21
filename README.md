@@ -8,14 +8,16 @@ OmniOptimizer is a Chrome extension that leverages advanced algorithmic optimiza
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Features](#features)
-- [Architecture & File Structure](#architecture--file-structure)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Technical Details](#technical-details)
-- [Contribution](#contribution)
-- [License](#license)
+- [OmniOptimizer: The Ultimate Trading Strategy Optimizer](#omnioptimizer-the-ultimate-trading-strategy-optimizer)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Architecture \& File Structure](#architecture--file-structure)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Technical Details](#technical-details)
+  - [Contribution](#contribution)
+  - [License](#license)
 
 ---
 
