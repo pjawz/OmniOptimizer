@@ -39,17 +39,8 @@
 (() => {
 	console.log("injector.js has been successfully started");
 
-	// reportDataEventCallback updated to an arrow function.
-	const reportDataEventCallback = (evt) => {
-		// Send a message to unlock the optimize button.
-		chrome.runtime.sendMessage({
-			popupAction: {
-				event: "unlockOptimizeButton",
-			},
-		});
-		// Reset isOptimizing flag.
-		chrome.storage.local.set({ isOptimizing: false });
-		// Retrieve relevant flags and data.
+	// Updated handler for ReportDataEvent; now calls removeHaloOverlay
+	const reportDataEventHandler = (evt) => {
 		chrome.storage.local.get(["saveReport", "userCanceled", "selectedAlgorithm"], (data) => {
 			if (data.saveReport) {
 				const reportKey = "report-data-" + evt.detail.strategyID;
@@ -75,85 +66,97 @@
 					console.warn("⚠️ Optimization Failed. Please try again with fewer steps.");
 				}
 			}
-			removeGradientBox();
+			removeHaloOverlay();
 		});
-		window.removeEventListener("ReportDataEvent", reportDataEventCallback, false);
+		window.removeEventListener("ReportDataEvent", reportDataEventHandler, false);
 	};
 
-	// createGradientBox as an arrow function.
-	const createGradientBox = () => {
-		gradientBox = document.createElement("div");
-		gradientBox.style.width = "100vw";
-		gradientBox.style.height = "100vh";
-		gradientBox.style.background =
-			"linear-gradient(90deg, rgba(213, 0, 249, 0.2), rgba(41, 98, 255, 0.2) 50.31%, rgba(0, 188, 230, 0.2))";
-		gradientBox.style.position = "fixed";
-		gradientBox.style.top = "0";
-		gradientBox.style.left = "0";
-		gradientBox.style.zIndex = "1000";
-		gradientBox.style.pointerEvents = "auto";
-		gradientBox.style.display = "flex";
-		gradientBox.style.justifyContent = "center";
-		gradientBox.style.alignItems = "center";
-
-		const textMessage = document.createElement("div");
-		textMessage.innerHTML =
-			"OmniOptimizer is running...<br>Please wait or click 'Cancel' to stop.";
-		textMessage.style.background =
-			"linear-gradient(90deg, rgba(0, 188, 230, 1), rgba(41, 98, 255, 1) 50.31%, rgba(213, 0, 249, 1))";
-		textMessage.style.webkitBackgroundClip = "text";
-		textMessage.style.backgroundClip = "text";
-		textMessage.style.webkitTextFillColor = "transparent";
-		textMessage.style.display = "inline-block";
-		textMessage.style.fontSize = "36px";
-		textMessage.style.fontWeight = "bold";
-		textMessage.style.textAlign = "center";
-
-		gradientBox.appendChild(textMessage);
-
-		[
-			"click",
-			"mousedown",
-			"mouseup",
-			"mousemove",
-			"wheel",
-			"keydown",
-			"keyup",
-			"keypress",
-		].forEach((eventType) => {
-			gradientBox.addEventListener(
-				eventType,
-				(e) => {
-					e.preventDefault();
-					e.stopPropagation();
-				},
-				true
-			);
+	// showHaloOverlay creates a halo-style overlay with a top-positioned content container and a cancel button.
+	const showHaloOverlay = () => {
+		haloOverlay = document.createElement("div");
+		haloOverlay.style.position = "fixed";
+		haloOverlay.style.top = "0";
+		haloOverlay.style.left = "0";
+		haloOverlay.style.width = "100vw";
+		haloOverlay.style.height = "100vh";
+		haloOverlay.style.zIndex = "1000";
+		haloOverlay.style.pointerEvents = "auto";
+		// Halo effect: transparent center with intense dark edges
+		haloOverlay.style.background = "radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.7) 100%)";
+	
+		// Create a content container positioned at the top center
+		const contentContainer = document.createElement("div");
+		contentContainer.style.position = "fixed";
+		contentContainer.style.top = "10%";
+		contentContainer.style.left = "50%";
+		contentContainer.style.transform = "translateX(-50%)";
+		contentContainer.style.color = "#fff";
+		contentContainer.style.fontSize = "24px";
+		contentContainer.style.fontWeight = "bold";
+		contentContainer.style.textAlign = "center";
+		contentContainer.style.background = "rgba(0, 0, 0, 0.5)";
+		contentContainer.style.padding = "10px 20px";
+		contentContainer.style.borderRadius = "8px";
+	
+		// Message text
+		const message = document.createElement("div");
+		message.innerHTML = "OmniOptimizer is running...";
+	
+		// Cancel button without confirmation
+		const cancelButton = document.createElement("button");
+		cancelButton.textContent = "Cancel";
+		cancelButton.style.marginLeft = "20px";
+		cancelButton.style.fontSize = "inherit";
+		cancelButton.style.padding = "5px 10px";
+		cancelButton.addEventListener("click", () => {
+			cancelOptimization();
 		});
-		document.body.appendChild(gradientBox);
+	
+		contentContainer.appendChild(message);
+		contentContainer.appendChild(cancelButton);
+		haloOverlay.appendChild(contentContainer);
+	
+		// Prevent interactions with the underlying page
+		["click", "mousedown", "mouseup", "mousemove", "wheel", "keydown", "keyup", "keypress"].forEach((eventType) => {
+			haloOverlay.addEventListener(eventType, (e) => {
+				e.preventDefault();
+				e.stopPropagation();
+			}, true);
+		});
+		document.body.appendChild(haloOverlay);
+		return true;
 	};
 
-	// removeGradientBox as an arrow function.
-	const removeGradientBox = () => {
-		if (gradientBox) {
-			document.body.removeChild(gradientBox);
-			gradientBox = null;
+	// removeHaloOverlay removes the halo overlay from the DOM
+	const removeHaloOverlay = () => {
+		if (haloOverlay) {
+			document.body.removeChild(haloOverlay);
+			haloOverlay = null;
 		}
 	};
 
-	// Global variable for the gradientBox.
-	let gradientBox;
+	// cancelOptimization immediately cancels the optimization process without an alert
+	const cancelOptimization = () => {
+		chrome.runtime.sendMessage({
+			popupAction: { event: "cancelOptimization" }
+		});
+		removeHaloOverlay();
+	};
 
-	// injectScriptIntoDOM updated to an arrow function.
+	// Global variable for the halo overlay
+	let haloOverlay;
+
+	// injectScriptIntoDOM updated to use the halo overlay and its new behavior
 	const injectScriptIntoDOM = () => {
-		createGradientBox();
-
-		// Define sendUserInputsMessage before its usage.
+		// Show the halo overlay with updated styling and cancel functionality
+		const overlayShown = showHaloOverlay();
+	
+		// Define sendUserInputsMessage before its usage
 		const sendUserInputsMessage = (userInputs) => {
 			const evt = new CustomEvent("UserInputsEvent", { detail: userInputs });
 			window.dispatchEvent(evt);
 		};
-
+	
 		if (document.querySelectorAll("div[data-name=indicator-properties-dialog]").length < 1) {
 			return false;
 		}
@@ -162,22 +165,19 @@
 		s.type = "module";
 		s.onload = () => {
 			s.remove();
-			console.log("✅ script.js has been successfully injected into the DOM.");
+			console.log("✅ controller.js has been successfully injected into the DOM.");
 			chrome.storage.local.get("selectedAlgorithm", ({ selectedAlgorithm }) => {
 				if (selectedAlgorithm) {
-					console.log(
-						"injector.js received Selected Algorithm from storage:",
-						selectedAlgorithm
-					);
+					console.log("injector.js received Selected Algorithm from storage:", selectedAlgorithm);
 					const evt = new CustomEvent("SelectedAlgorithmEvent", {
-						detail: { algorithm: selectedAlgorithm },
+						detail: { algorithm: selectedAlgorithm }
 					});
 					window.dispatchEvent(evt);
 				}
 			});
 		};
 		(document.head || document.documentElement).appendChild(s);
-
+	
 		chrome.storage.onChanged.addListener((changes) => {
 			if (changes.stopOptimization) {
 				const event = new CustomEvent("StopOptimizationStatus", {
@@ -186,31 +186,26 @@
 				window.dispatchEvent(event);
 			}
 		});
-
+	
 		chrome.storage.local.get("userInputs", ({ userInputs }) => {
 			setTimeout(sendUserInputsMessage, 500, userInputs);
 		});
-
-		return true;
+	
+		return overlayShown;
 	};
 
-	// Initiate injection and then set up event listener and messaging accordingly.
+	// Initiate injection and then set up event listener and messaging accordingly
 	const isInjected = injectScriptIntoDOM();
 	if (isInjected) {
-		window.addEventListener("ReportDataEvent", reportDataEventCallback, false);
+		window.addEventListener("ReportDataEvent", reportDataEventHandler, false);
 		chrome.runtime.sendMessage({
-			popupAction: {
-				event: "lockOptimizeButton",
-			},
+			popupAction: { event: "lockOptimizeButton" },
 		});
 	} else {
 		chrome.runtime.sendMessage({
-			notify: {
-				type: "warning",
-				content: "Error Optimization - Open Strategy Settings on Tradingview.com",
-			},
+			notify: { type: "warning", content: "Error Optimization - Open Strategy Settings on Tradingview.com" },
 		});
 		chrome.storage.local.set({ isOptimizing: false });
-		removeGradientBox();
+		removeHaloOverlay();
 	}
 })();
