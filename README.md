@@ -1,3 +1,5 @@
+![OmniOptimizer Logo](/images/icons/OmniOptimizerLogo.png)
+
 # OmniOptimizer: The Ultimate Trading Strategy Optimizer
 
 OmniOptimizer is a Chrome extension that leverages advanced algorithmic optimization techniques—such as Genetic, Traversal, and Bayesian algorithms—to dynamically refine trading strategies on TradingView. By simulating user interactions and monitoring performance metrics, OmniOptimizer helps traders optimize their strategy parameters and maximize profits.
