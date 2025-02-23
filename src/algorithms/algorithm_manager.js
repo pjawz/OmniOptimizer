@@ -4,6 +4,7 @@ import { iterateBayesian } from "./bayesian.js";
 
 // Top-level manager: chooses which algorithm to run.
 export async function runAlgorithm(user_inputs, optimization_results, deps) {
+	console.log("runAlgorithm started with inputs:", user_inputs);
 	// Calculate total backtest count.
 	let total_count = 1;
 	user_inputs.forEach((element) => {
@@ -50,11 +51,13 @@ export async function runAlgorithm(user_inputs, optimization_results, deps) {
 			(params, inputs, results) => evaluateOutcome(params, inputs, results, deps)
 		);
 	}
+	console.log("runAlgorithm completed with results:", optimization_results);
 }
 
 // Global objective function with dependency injection for utility functions.
 // Expect dependencies: { change_tv_input, sleep, get_parameters_from_window, report_builder, OptimizeParams }
 export async function evaluateOutcome(parameters, user_inputs, optimization_results, deps) {
+	console.log("evaluateOutcome invoked with outcome:", parameters);
 	const report_data = {
 		net_profit: { amount: 0, percent: "" },
 		closed_trades: 0,
@@ -129,4 +132,5 @@ export async function evaluateOutcome(parameters, user_inputs, optimization_resu
 	});
 	await deps.sleep(300);
 	await Promise.race([p1, p2]).catch((reason) => console.log(`Rejected: ${reason}`));
+	console.log("evaluateOutcome finished processing");
 }

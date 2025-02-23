@@ -7,6 +7,8 @@
  * @module genetic
  */
 
+console.log("Genetic algorithm module loaded");
+
 /**
  * Iterates through generations using a genetic algorithm to optimize parameters.
  * @param {number} population_size - The size of the population.
@@ -25,6 +27,14 @@ export async function iterateGenetic(
 	optimization_results,
 	fitness_function
 ) {
+	console.log("iterateGenetic called with params:", {
+		population_size,
+		user_inputs,
+		max_iterations,
+		mutation_probability,
+		optimization_results,
+		fitness_function,
+	});
 	/**
 	 * Initializes the population with random individuals.
 	 * @param {number} population_size - The size of the population.
@@ -130,5 +140,6 @@ export async function iterateGenetic(
 			population.push(child);
 		}
 	}
+	console.log("iterateGenetic completed");
 	return best_individual;
 }

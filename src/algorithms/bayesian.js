@@ -1,3 +1,5 @@
+console.log("Bayesian algorithm module loaded");
+
 /**
  * Class representing a Bayesian Optimizer.
  * This optimizer uses surrogate modeling with a Gaussian kernel
@@ -249,4 +251,11 @@ export async function iterateBayesian(
 		optimization_results.set(next_params.toString(), fitness);
 	}
 	return optimizer.getBestParameters();
+}
+
+export function runBayesianAlgorithm(params) {
+	console.log("runBayesianAlgorithm initiated with params:", params);
+	// ...existing bayesian algorithm logic...
+	console.log("runBayesianAlgorithm completed");
+	return {};
 }

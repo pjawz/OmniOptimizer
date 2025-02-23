@@ -3,12 +3,16 @@
 		"default_popup": "src/dashboard/dashboard.html"
 	},
 	"background": {
-		"service_worker": "src/optimizer.js"
+		"service_worker": "src/background.js"
 	},
 	"content_scripts": [
 		{
-			"js": ["src/bridge.js"],
-			"matches": ["<all_urls>"],
+			"js": [
+				"src/bridge.js"
+			],
+			"matches": [
+				"<all_urls>"
+			],
 			"run_at": "document_end"
 		}
 	],
@@ -17,7 +21,9 @@
 	},
 	"default_locale": "en",
 	"description": "OmniOptimizer leverages algorithmic optimization to dynamically refine trading strategies and perfect performance.",
-	"host_permissions": ["<all_urls>"],
+	"host_permissions": [
+		"<all_urls>"
+	],
 	"icons": {
 		"128": "images/icons/Logo_128x128.png",
 		"16": "images/icons/Logo_16x16.png",
@@ -27,16 +33,23 @@
 	"manifest_version": 3,
 	"name": "OmniOptimizer",
 	"update_url": "https://clients2.google.com/service/update2/crx",
-	"permissions": ["storage", "activeTab", "scripting", "notifications", "alarms"],
+	"permissions": [
+		"storage",
+		"activeTab",
+		"scripting",
+		"notifications",
+		"alarms"
+	],
 	"version": "2.3.8",
 	"web_accessible_resources": [
 		{
-			"matches": ["<all_urls>"],
 			"resources": [
-				"src/controller.js",
-				"src/utils/listeners.js",
-				"src/utils/utils.js",
-				"src/algorithms/algorithm_manager.js"
+				"src/utils/*.js",
+				"src/algorithms/*.js",
+				"src/*.js"
+			],
+			"matches": [
+				"<all_urls>"
 			]
 		}
 	]

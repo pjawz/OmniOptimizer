@@ -1,3 +1,7 @@
+console.log("Listeners module loaded");
+
+console.log("Listeners module loaded");
+
 const initializeListeners = () => {
 	// Listener: SelectedAlgorithmEvent updates window.selected_algorithm
 	window.addEventListener("SelectedAlgorithmEvent", (e) => {

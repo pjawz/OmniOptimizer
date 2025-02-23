@@ -12,7 +12,6 @@ OmniOptimizer is a Chrome extension that leverages advanced algorithmic optimiza
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Features](#features)
-  - [Architecture \& File Structure](#architecture--file-structure)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Technical Details](#technical-details)
@@ -35,21 +34,6 @@ OmniOptimizer is designed to simplify the process of optimizing trading strategi
 - **Seamless Integration:** Injects scripts into TradingView’s indicator properties dialog for dynamic parameter tuning.
 - **Robust Error Handling:** Uses try/catch structures and custom events to ensure a smooth optimization process.
 
----
-
-## Architecture & File Structure
-
-- **manifest.json** – Chrome extension manifest specifying content scripts, background scripts, and permissions.
-- **src/**
-  - **dashboard/** – Contains `dashboard.html`, `dashboard.css`, and `dashboard.js` for the main UI.
-  - **report/** – Houses `reports.html`, `reports.css`, and `reports.js` for displaying optimization reports.
-  - **controller.js** – Main logic for executing optimization routines.
-  - **optimizer.js** – Handles background tasks and message passing.
-  - **injector.js** – Injects scripts into TradingView pages and manages overlay UI.
-  - **utils/** – Utility scripts including event listeners and helper functions.
-  - **algorithms/** – Implements optimization logic (genetic, traversal, bayesian).
-
----
 
 ## Installation
 

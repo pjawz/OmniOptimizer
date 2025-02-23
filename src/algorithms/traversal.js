@@ -1,3 +1,5 @@
+console.log("Traversal algorithm module loaded");
+
 /**
  * Iterates over a range of values for each user input and performs optimization.
  *
@@ -29,6 +31,7 @@ export async function iterateRanges(
 	sleep,
 	OptimizeParams
 ) {
+	console.log("iterateRanges started with params:", { user_inputs, optimization_results, index });
 	if (window.stop_optimization_flag) {
 		console.log("Optimization stopped by user.");
 		return;
@@ -56,6 +59,7 @@ export async function iterateRanges(
 			await change_tv_input(window.tvInputs[0], value);
 			await OptimizeParams(user_inputs, 0, optimization_results);
 		}
+		console.log("iterateRanges completed");
 		return;
 	}
 	for (let i = start; i <= end; i += step ? step : 0.1) {
@@ -70,4 +74,5 @@ export async function iterateRanges(
 			OptimizeParams
 		);
 	}
+	console.log("iterateRanges completed");
 }
