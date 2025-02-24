@@ -1,42 +1,65 @@
 {
-  "name": "OmniOptimizer TradingView Optimizer",
-  "description": "TradingView Parameter Optimizer as an extension",
-  "version": "1.2.3",
   "manifest_version": 3,
+  "author": "Peter Joslyn",
+  "description": "An assistant for backtesting trading strategies and showing external signals in Tradingview",
+  "name": "OmniOptimizer assistant",
+  "version": "0.2.0",
   "icons": {
-    "16": "images/icons/omnioptimizer16.png",
-    "32": "images/icons/omnioptimizer32.png",
-    "48": "images/icons/omnioptimizer48.png",
-    "128": "images/icons/omnioptimizer128.png"
+    "16": "images/tv_assist_16.png",
+    "32": "images/tv_assist_32.png",
+    "48": "images/tv_assist_48.png",
+    "64": "images/tv_assist_64.png",
+    "128": "images/tv_assist_128.png"
   },
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline'; img-src 'self' https://img.buymeacoffee.com https://cdn.buymeacoffee.com https://www.googleapis.com https://*.googleusercontent.com https://*.omnioptimizer.app/* data:;"
-  },
-  "background": {
-    "service_worker": "background.js"
-  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.tradingview.com/chart/*"
+      ],
+      "js": [
+        "content_scripts/selector.js",
+        "content_scripts/page.js",
+        "content_scripts/ui.js",
+        "content_scripts/tv.js",
+        "content_scripts/tvChart.js",
+        "content_scripts/file.js",
+        "content_scripts/storage.js",
+        "content_scripts/signal.js",
+        "content_scripts/model.js",
+        "content_scripts/backtest.js",
+        "content_scripts/action.js",
+        "content_scripts/controller.js",
+        "content_scripts/bayesian.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
   "permissions": [
     "storage",
-    "activeTab",
-    "scripting",
-    "notifications",
-    "identity",
-    "identity.email"
+    "unlimitedStorage",
+    "activeTab"
   ],
   "action": {
-    "default_popup": "popup/popup.html"
+    "default_icon": {
+      "16": "images/tv_assist_16.png",
+      "32": "images/tv_assist_32.png",
+      "48": "images/tv_assist_48.png",
+      "64": "images/tv_assist_64.png",
+      "128": "images/tv_assist_128.png"
+    },
+    "default_title": "TV",
+    "default_popup": "popup/assistant.html"
   },
   "web_accessible_resources": [
     {
       "resources": [
-        "script.js"
+        "page-context.js",
+        "fonts/fa-solid-900.woff2",
+        "lib/**"
       ],
       "matches": [
-        "https://*.tradingview.com/*"
+        "<all_urls>"
       ]
     }
-  ],
-  "host_permissions": [
-    "https://*.omnioptimizer.app/*"
   ]
 }
